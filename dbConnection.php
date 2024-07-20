@@ -13,7 +13,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.
     // Use remote server database credentials
     $db_host = "localhost";
     $db_user = "dijisoft_lms_db";
-    $db_password = "diji@2025";
+    $db_password = "diji@2024";
     $db_name = "dijisoft_lms_db";
     //echo "Connected to remote server database";
 }
