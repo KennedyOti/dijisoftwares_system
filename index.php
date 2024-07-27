@@ -176,7 +176,7 @@
                 <!-- ***** Mini Box Start ***** -->
                 <div class="row">
                     <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="portal.php" class="minii-box">
+                        <a href="#" class="minii-box">
                             <i><img src="assets/images/site.png" alt=""></i>
                             <strong>Website Development & Design</strong>
                             <BR>
@@ -184,7 +184,7 @@
                         </a>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="portal.php" class="minii-box">
+                        <a href="#" class="minii-box">
                             <i><img src="assets/images/box-alt.png" alt=""></i>
                             <strong>Software &  System Development</strong>
                             <BR>
@@ -192,7 +192,7 @@
                         </a>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="portal.php" class="minii-box">
+                        <a href="#" class="minii-box">
                             <i><img src="assets/images/customize-computer.png" alt=""></i>
                             <strong>UI & UX Design</strong>
                             <BR>
@@ -200,7 +200,7 @@
                         </a>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="portal.php" class="minii-box">
+                        <a href="#" class="minii-box">
                             <i><img src="assets/images/network-analytic.png" alt=""></i>
                             <strong>Networking and CCTV installation</strong>
                             <BR>
@@ -208,7 +208,7 @@
                         </a>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="portal.php" class="minii-box">
+                        <a href="#" class="minii-box">
                             <i><img src="assets/images/career-growth.png" alt=""></i>
                             <strong>Basic Computer Packages</strong>
                             <BR>
@@ -216,7 +216,7 @@
                         </a>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="portal.php" class="minii-box">
+                        <a href="#" class="minii-box">
                             <i><img src="assets/images/holding-hand-gear.png" alt=""></i>
                             <strong>Software Maintenace Services</strong>
                             <BR>

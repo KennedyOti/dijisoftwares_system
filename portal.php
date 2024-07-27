@@ -1,184 +1,151 @@
-<?php
-  include('./dbConnection.php');
-  // Header Include from mainInclude 
-  include('./mainInclude/header.php'); 
-?>  
-    <!-- Start Video Background-->
-    <div class="container-fluid remove-vid-marg">
-      <div class="vid-parent">
-        <video playsinline autoplay muted loop>
-          <source src="video/banvid.mp4" /> 
-           
-        </video>
-        
-        <div class="vid-overlay"></div>
-      </div>
-      <div class="vid-content" >
-        <h1 class="my-content">Welcome to Dijisoftwares</h1>
-        <small class="my-content">Dijisoftwares specializes in software development and training, <br>helping businesses and individuals achieve their technology goals.</small><br />
-        <?php    
-              if(!isset($_SESSION['is_login'])){
-                echo '<a class="btn btn-danger mt-3" href="#" data-toggle="modal" data-target="#stuRegModalCenter">Get Started</a>';
-              } else {
-                echo '<a class="btn btn-danger mt-3" href="student/studentProfile.php">My Profile</a>';
-              }
-          ?> 
-       
-      </div>
-    </div> <!-- End Video Background -->
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="container-fluid bg-dark txt-banner"> <!-- Start Text Banner -->
-        <div class="row bottom-banner">
-          <div class="col-sm">
-            <h5> <i class="fas fa-book-open mr-3"></i> 100+ Online Courses</h5>
-          </div>
-          <div class="col-sm">
-            <h5><i class="fas fa-users mr-3"></i> Expert Instructors</h5>
-          </div>
-          <div class="col-sm">
-            <h5><i class="fas fa-keyboard mr-3"></i> Lifetime Access</h5>
-          </div>
-          <div class="col-sm">
-            <h5><i class="fas fa-rupee-sign mr-3"></i> Money Back Guarantee*</h5>
-          </div>
-        </div>
-    </div> <!-- End Text Banner -->
-    
-    <div class="container mt-5"> <!-- Start Most Popular Course -->
-      <h1 class="text-center">Popular Course</h1>
-      <div class="card-deck mt-4"> <!-- Start Most Popular Course 1st Card Deck -->
-        <?php
-        $sql = "SELECT * FROM course LIMIT 3";
-        $result = $conn->query($sql);
-        if($result->num_rows > 0){ 
-          while($row = $result->fetch_assoc()){
-            $course_id = $row['course_id'];
-            echo '
-            <a href="coursedetails.php?course_id='.$course_id.'" class="btn" style="text-align: left; padding:0px; margin:0px;">
-              <div class="card">
-                <img src="'.str_replace('..', '.', $row['course_img']).'" class="card-img-top" alt="Guitar" />
-                <div class="card-body">
-                  <h5 class="card-title">'.$row['course_name'].'</h5>
-                  <p class="card-text">'.$row['course_desc'].'</p>
-                </div>
-                <div class="card-footer">
-                  <p class="card-text d-inline">Price: <small><del>Ksh '.$row['course_original_price'].'</del></small> <span class="font-weight-bolder">Ksh '.$row['course_price'].'<span></p> <a class="btn btn-danger text-white font-weight-bolder float-right" href="coursedetails.php?course_id='.$course_id.'">Enroll</a>
-                </div>
-              </div>
-            </a>  ';
-          }
-        }
-        ?>   
-      </div>  <!-- End Most Popular Course 1st Card Deck -->   
-      <div class="card-deck mt-4"> <!-- Start Most Popular Course 2nd Card Deck -->
-        <?php
-          $sql = "SELECT * FROM course LIMIT 3,3";
-          $result = $conn->query($sql);
-          if($result->num_rows > 0){ 
-            while($row = $result->fetch_assoc()){
-              $course_id = $row['course_id'];
-              echo '
-                <a href="coursedetails.php?course_id='.$course_id.'"  class="btn" style="text-align: left; padding:0px;">
-                  <div class="card">
-                    <img src="'.str_replace('..', '.', $row['course_img']).'" class="card-img-top" alt="Guitar" />
-                    <div class="card-body">
-                      <h5 class="card-title">'.$row['course_name'].'</h5>
-                      <p class="card-text">'.$row['course_desc'].'</p>
-                    </div>
-                    <div class="card-footer">
-                      <p class="card-text d-inline">Price: <small><del>&#8377 '.$row['course_original_price'].'</del></small> <span class="font-weight-bolder">Ksh '.$row['course_price'].'<span></p> <a class="btn btn-danger text-white font-weight-bolder float-right" href="#">Enroll</a>
-                    </div>
-                  </div>
-                </a>  ';
+<head>
+    <meta charset="utf-8">
+    <title>Dijisoftwares</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <link href="img/favicon.ico" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="css/bootstrap1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <style>
+        @media (max-width: 768px) {
+            .navbar .btn {
+                margin-top: 10px;
             }
-          }
-        ?>
-      </div>   <!-- End Most Popular Course 2nd Card Deck --> 
-      <div class="text-center m-2">
-        <a class="btn btn-danger btn-sm" href="courses.php">View All Course</a> 
-      </div>
-    </div>  <!-- End Most Popular Course -->
+        }
+    </style>
+</head>
 
-    <?php 
-    // Contact Us
-    include('./contact.php'); 
-    ?>  
+<body>
 
-     <!-- Start Students Testimonial -->
-      <div class="container-fluid mt-5" style="background-color: #04aa6d" id="Feedback">
-        <h1 class="text-center testyheading p-4"> Student's Feedback </h1>
-        <div class="row">
-          <div class="col-md-12">
-            <div id="testimonial-slider" class="owl-carousel">
-            <?php 
-              $sql = "SELECT s.stu_name, s.stu_occ, s.stu_img, f.f_content FROM student AS s JOIN feedback AS f ON s.stu_id = f.stu_id";
-              $result = $conn->query($sql);
-              if($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()){
-                  $s_img = $row['stu_img'];
-                  $n_img = str_replace('../','',$s_img)
-            ?>
-              <div class="testimonial">
-                <p class="description">
-                <?php echo $row['f_content'];?>  
-                </p>
-                <div class="pic">
-                  <img src="<?php echo $n_img; ?>" alt=""/>
-                </div>
-                <div class="testimonial-prof">
-                  <h4><?php echo $row['stu_name']; ?></h4>
-                  <small><?php echo $row['stu_occ']; ?></small>
-                </div>
-              </div>
-              <?php }} ?>
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="portal.php" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-primary"><i class="mr-3"></i>Dijisoftwares</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <a href="userLogin.php" class="btn btn-success py-2 px-4 d-lg-none">Log In</a>
+                <a href="index.php" class="btn btn-success py-2 px-4 d-lg-none">Visit Website</a>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item d-none d-lg-block">
+                        <a href="userLogin.php" class="btn btn-success py-2 px-4 ml-3">Log In</a>
+                    </li>
+                    <li class="nav-item d-none d-lg-block">
+                        <a href="index.php" class="btn btn-success py-2 px-4 ml-3">Visit Website</a>
+                    </li>
+                </ul>
             </div>
-          </div>
-        </div>
-    </div>  <!-- End Students Testimonial -->
+        </nav>
+    </div>
 
-    <div class="container-fluid bg-dark"> <!-- Start Social Follow -->
-        <div class="row text-white text-center p-1">
-          <div class="col-sm">
-            <a class="text-white social-hover" href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
-          </div>
-          <div class="col-sm">
-            <a class="text-white social-hover" href="#"><i class="fab fa-twitter"></i> Twitter</a>
-          </div>
-          <div class="col-sm">
-            <a class="text-white social-hover" href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-          </div>
-          <div class="col-sm">
-            <a class="text-white social-hover" href="#"><i class="fab fa-instagram"></i> Instagram</a>
-          </div>
+    <!-- Header-->
+    <div class="jumbotron jumbotron-fluid position-relative overlay-bottom" style="margin-bottom: 90px;">
+        <div class="container text-center my-5 py-5">
+            <h2 class="text-white display-1 mb-5">Solution Oriented</h2>
+            <h3 class="text-white mt-4 mb-4">Dijisoftwares specializes in software development and training, helping businesses and individuals achieve their technology goals.</h3>
         </div>
-    </div> <!-- End Social Follow -->
+    </div>
+    <!-- Header-->
 
-    <!-- Start About Section -->
-    <div class="container-fluid p-4" style="background-color:#E9ECEF">
-      <div class="container" style="background-color:#E9ECEF">
-        <div class="row text-center">
-          <div class="col-sm">
-            <h5>About Us</h5>
-              <p>iSchool provides universal access to the world’s best education, partnering with top universities and organizations to offer courses online.</p>
-          </div>
-          <div class="col-sm">
-            <h5>Category</h5>
-            <a class="text-dark" href="#">Web Development</a><br />
-            <a class="text-dark" href="#">Web Designing</a><br />
-            <a class="text-dark" href="#">Android App Dev</a><br />
-            <a class="text-dark" href="#">iOS Development</a><br />
-            <a class="text-dark" href="#">Data Analysis</a><br />
-          </div>
-          <div class="col-sm">
-            <h5>Contact Us</h5>
-            <p>Dijisoftwares <br> Egerton University Gate, <br> Njoro, Nakuru <br> Phone. 0793543659 </p>
-          </div>
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100" src="img/ostu.jpg" style="object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <p class="text-dark"><b>We manage all students and teachers with their courses. Students can do assignments and refer to all notes through this system. Teachers can give marks and monitor students.</b></p>
+                    <div class="row pt-3 mx-0">
+                        <div class="col-3 px-0">
+                            <div class="text-center p-4">
+                                <h1 class="text-success" data-toggle="counter-up"><i class="bi bi-journal-richtext"></i></h1>
+                                <h6 class="text-uppercase text-success">Courses</h6>
+                            </div>
+                        </div>
+                        <div class="col-3 px-0">
+                            <div class="text-center p-4">
+                                <h1 class="text-success" data-toggle="counter-up"><i class="bi bi-journals"></i></h1>
+                                <h6 class="text-uppercase text-success">Notes</h6>
+                            </div>
+                        </div>
+                        <div class="col-3 px-0">
+                            <div class="text-center p-4">
+                                <h1 class="text-success" data-toggle="counter-up"><i class="bi bi-book"></i></h1>
+                                <h6 class="text-uppercase text-success">Exams</h6>
+                            </div>
+                        </div>
+                        <div class="col-3 px-0">
+                            <div class="text-center p-4">
+                                <h1 class="text-success" data-toggle="counter-up"><i class="bi bi-journal-check"></i></h1>
+                                <h6 class="text-uppercase text-success">Results</h6>
+                            </div>
+                        </div>
+
+                        <h2 class="mt-5 text-primary">Login with creating account</h2>
+                    </div>
+                    <div class="row">
+                        <a href="userRegister.php?user=student" class="btn btn-outline-success m-1">STUDENT</a>
+                        <a href="userRegister.php?user=teacher" class="btn btn-outline-success m-1">TEACHER</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div> <!-- End About Section -->
+    </div>
 
-  <?php 
-    // Footer Include from mainInclude 
-    include('./mainInclude/footer.php'); 
-    
-  ?>  
+    <!-- Footer Start -->
+    <div class="container-fluid position-relative overlay-top bg-success text-white-50 py-5" style="margin-top: 90px;">
+        <div class="container mt-5 pt-5">
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    <h1 class="mt-n2 text-uppercase text-white"><i class="fa fa-book-reader mr-3"></i>Dijisoftwares</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-5 text-white">
+                    <h3 class="text-white mb-4">Available Access</h3>
+                    <p>Teachers</p>
+                    <p>Students</p>
+                </div>
+                <div class="col-md-4 mb-5 text-white">
+                    <h3 class="text-white mb-4">Features</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <p>Online courses</p>
+                        <p>Assignments</p>
+                        <p>Notes</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Contact admin</h3>
+                    <div class="text-white d-flex flex-column justify-content-start">
+                        <h5 class="text-white">kennedyonyango@gmail.com</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-success text-white-50 border-top py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left mb-3 mb-md-0 text-white">
+                    <p class="m-0">Copyright &copy; Dijisoftwares. All Rights Reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
