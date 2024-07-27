@@ -78,6 +78,7 @@
                         <h1>We provide the best <strong>software solutions</strong><br>to grow your <strong>business</strong></h1>
                         <p>Dijisoftwares specializes in software development and training, helping businesses and individuals achieve their technology goals.</p>
                         <!-- <a href="#features" class="main-button-slider">Discover More</a> -->
+                         <h1>Stop Working Now</h1>
                     </div>
                 </div>
             </div>
